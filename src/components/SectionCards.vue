@@ -4,7 +4,7 @@
             <v-col v-for="(item, i) in items" :key="i" cols="12" :lg="cols">
                 <v-card v-if="i % 2 == 0" :variant="variant" class="my-8 py-4 bg-surface-light">
                     <v-card-title>
-                        <h2>{{ item.title }}</h2>
+                        <h3>{{ item.title }}</h3>
                     </v-card-title>
                     <v-card-text>
                         {{ item.text }}
@@ -12,7 +12,7 @@
                 </v-card>
                 <v-card v-else :variant="variant" class="my-8 py-4">
                     <v-card-title>
-                        <h2>{{ item.title }}</h2>
+                        <h3>{{ item.title }}</h3>
                     </v-card-title>
                     <v-card-text>
                         {{ item.text }}

@@ -2,7 +2,7 @@
     <section :id="id">
         <v-card>
             <v-card-title>
-                <h2>Contact us</h2>
+                <h3>Contact us</h3>
             </v-card-title>
             <v-card-subtitle >
                 <h3>Do you have any questions?</h3>

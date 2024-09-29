@@ -2,7 +2,7 @@
     <section :id="id">
         <v-card variant="elevated">
             <v-card-title>
-                <h2>{{ title }}</h2>
+                <h3>{{ title }}</h3>
             </v-card-title>
             <v-card-text>
                 <v-expansion-panels class="my-4" variant="inset">

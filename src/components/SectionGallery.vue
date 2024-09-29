@@ -2,7 +2,7 @@
     <section :id="id">
         <v-card variant="elevated">
             <v-card-title>
-                <h2>{{ galleryTitle }}</h2>
+                <h3>{{ galleryTitle }}</h3>
             </v-card-title>
             <v-card-text>
                 <v-row>

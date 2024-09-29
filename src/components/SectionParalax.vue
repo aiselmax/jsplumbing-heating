@@ -1,5 +1,5 @@
 <template>
-    <div class="parallax" :src='img' :style="{ backgroundImage: 'url(' + img + ')' }"> </div>
+    <div class="parallax" :src='img' :style="{ backgroundImage: 'url(' + img + ')' }" rel="preload"> </div>
 </template>
 <style>
 .parallax {
@@ -15,5 +15,10 @@
 <script setup>
 import { defineProps } from 'vue';
 
-defineProps(["img"]);
+defineProps({
+    img: {
+        type: String,
+        required: true,
+    },
+});
 </script>

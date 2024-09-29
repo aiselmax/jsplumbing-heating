@@ -6,7 +6,7 @@
                 {{ link.title }}
             </v-btn>
             <v-col class="text-center mt-4" cols="12">
-                {{ new Date().getFullYear() }} — JS Plumbing & Heating Installations Ltd
+                {{ new Date().getFullYear() }} &copy; {{ text }}
             </v-col>
         </v-row>
     </v-footer>
@@ -22,5 +22,8 @@ defineProps({
         type: String,
         required: true
     },
+    text: {
+        type: String,
+    }
 });
 </script>

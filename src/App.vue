@@ -4,19 +4,19 @@
       <MobileAppBar :menuItems="menuItems" />
       <NavMenu :menuItems="menuItems" />
       <v-main>
-        <SectionTeaser id="home" title="JS Plumbing & Heating Installations Ltd." text="Plumbers in Kingston and surrounding areas." btnText="get free quote" />
-        <SectionParalax :img="img" />
-        <SectionCards id="about" :items="aboutItems" :cols="6" variant="elevated" height="250px" />
-        <SectionParalax :img="img" />
-        <SectionCards id="philosophy" :items="philosophyItems" :cols="4" variant="elevated" height="250px" />
-        <SectionParalax :img="img" />
-        <SectionService id="services" :items="serviceItems" title="Our Services" />
-        <SectionParalax :img="img" />
-        <SectionGallery id="gallery" :galleryItems="galleryItems" />
-        <SectionParalax :img="img" />
-        <SectionContact id="contact" :items="contactItems" email="phinstallations@gmx.eu" />
-        <SectionParalax :img="img" />
-        <SectionFooter id="footer" :menuItems="menuItems" />
+        <SectionTeaser :id="homeSection.id" :title="homeSection.title" :text="homeSection.text" :btnText="homeSection.btnText" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionCards :id="aboutSection.id" :items="aboutSection.items" :cols="6" height="250px" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionCards :id="philosophySection.id" :items="philosophySection.items" :cols="4" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionService :id="servicesSection.id" :items="servicesSection.items" :title="servicesSection.title" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionGallery :id="gallerySection.id" :galleryItems="gallerySection.galleryItems" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionContact :id="contactSection.id" :items="contactSection.items" :email="contactSection.email" />
+        <SectionParalax :img="preloadedImg" />
+        <SectionFooter :id="footerSection.id" :menuItems="menuItems" :text="footerSection.text"/>
       </v-main>
     </v-container>
   </v-app>
@@ -38,37 +38,23 @@ body,
 }
 
 h1 {
-  font-size: 2.5rem !important;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem) !important;
   color: #003e6c;
 }
 
 h2 {
-  font-size: 2rem !important;
+  font-size: clamp(1.375rem, 1.5vw + 0.5rem, 2rem) !important;
   color: #4f4f4f;
 }
 
 h3 {
-  font-size: 1.75rem !important;
-}
-
-
-@media (max-width: 960px) {
-  h1 {
-    font-size: calc(1.5rem + 1.5vw) !important;
-  }
-
-  h2 {
-    font-size: calc(1.375rem + 0.9vw) !important;
-  }
-
-  h3 {
-    font-size: calc(1.25rem + 0.5vw) !important;
-  }
+  font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem) !important;
 }
 </style>
 <script setup>
+import { ref, onMounted } from 'vue';
+
 import NavMenu from './components/NavMenu.vue';
-import img from './assets/home.jpg';
 import SectionTeaser from './components/SectionTeaser.vue';
 import SectionParalax from './components/SectionParalax.vue';
 import SectionCards from './components/SectionCards.vue';
@@ -78,148 +64,30 @@ import SectionContact from './components/SectionContact.vue';
 import SectionFooter from './components/SectionFooter.vue';
 import MobileAppBar from './components/MobileAppBar.vue';
 
-const menuItems = [
-  { title: '', value: 'home', icon: '' },
-  { title: 'About us', value: 'about', icon: 'mdi-account-box' },
-  { title: 'Our philosophy', value: 'philosophy', icon: 'mdi-lightbulb-outline' },
-  { title: 'Services', value: 'services', icon: 'mdi-briefcase' },
-  { title: 'Gallery', value: 'gallery', icon: 'mdi-image-multiple' },
-  { title: 'Contact', value: 'contact', icon: 'mdi-phone' },
-  { title: '', value: 'footer', icon: '' },
-];
+import { menuConfig, sectionsConfig } from './dataConfig.js';
 
-const aboutItems = [
-  {
-    title: 'About us',
-    text: 'We are a family run business, based in Kingston upon Thames. With over 3 decades of experience, JS Plumbing & Heating Installations has eveloved in bringing high quality services and installations of leading industry standard plumbing and heating systems to clients.\n\n Through the development of our core strategy, designed to provide our clients with an allround and complete service, we have achieved in maintaining reliable, successful and sound solutions to the installation of plumbing and heating systems and appliances.\n\n We strive to continue building on our strategic product, services and experience through our up to date knowledge based research into industry leading manufacturers and their plumbing and heating appliances, assuring our solutions meet our clients’ economical and environmental demands.'
-  },
-  {
-    title: 'Our vision',
-    text: 'Our vision was concieved with the idea for providing a more dynamic, efficient and cost effective approach in finding solutions to more reliable, stable and compatible plumbing and heating systems that meet our client’s demands.\n\nYears of experience working with clients, architects and construction companies gave us the knowledge in developing a strategy flexible enough to cater for individual solutions, whilest ensuring quality, stability and long life for all our installed plumbing and heating systems. \n\nOur values represent precise and thourough planning for our solutions, accurate, clean and professional installation of plumbing and heating appliances and an after care service to maintain the systems quality and longlevity. At the core of our product and services is a strong customer relationship, advising and consulting every step of the way.'
-  },
-];
-const philosophyItems = [
-  {
-    title: 'Consultation',
-    text: 'Based on a firm belief that careful, precise and informed planning is the key to a successful project, we take a thorough approach in assessing our client’s requests, specifications, thoughts, desires and living space to establish a project overview. Our consulting service extends to advising our clients on all technical, design and aesthethic aspects when submitting our individual solutions. We proceed in building a detailed plan for implementing and installing our plumbing and heating solutions, in order to provide you with a detailed and transparent estimate of costs in an accessible way.'
-  },
-  {
-    title: 'Installation',
-    text: 'We take great care in implementing our solutions and installing plumbing and heating systems in a professional, accurate and appropriately clean manner. We supervise and attend to our clients throughout the workmanship period with advice and administration, including applications and connections of gas and water mains. Collaboration with architects and construction companies working on the project are an essential part of our workflow in ensuring a seamless integration of our planned plumbing and heating solutions.'
-  },
-  {
-    title: 'Aftercare',
-    text: 'We value and appreciate maintaining a strong after sales customer relationship. Our term of guarantee ensures a minimum 1 year warranty on all the work carried out and on all delivered materials including manufacturer warranties. We provide our clients with maintainence services on all installed systems and appliances within and outside of our warranty.'
-  },
-];
+import imgPath from './assets/home.jpg';
+const preloadedImg = ref('');
 
-const serviceItems = [
-  {
-    title: 'Bathroom installations + refurbishments',
-    text: 'Transform your bathroom into a modern, functional space with our expert plumbing services. Whether you are planning a new installation or refurbishing an existing bathroom, our skilled plumbers handle everything from pipework to fixture installations with precision. We ensure high-quality finishes, efficient water systems, and stylish, durable results tailored to your needs. Let us bring your bathroom vision to life—on time and within budget.'
-  },
-  {
-    title: "Bathroom repair",
-    text: "We specialize in bathroom repairs, fixing leaks, faulty fixtures, and ensuring your plumbing works smoothly."
-  },
-  {
-    title: "Boiling water unit installations",
-    text: "We install boiling water units for instant hot water, perfect for kitchens, offices, and commercial spaces."
-  },
-  {
-    title: "Water softener installations + services",
-    text: "Protect your plumbing from hard water damage with our expert water softener installations and ongoing maintenance services."
-  },
-  {
-    title: "Vented and unvented hot water cylinder installations, replacements, services, repairs + certificates",
-    text: "Our team handles all aspects of hot water cylinder systems, from installation and repairs to safety certifications for peace of mind."
-  },
-  {
-    title: "Boiler installations, replacements, services, diagnostics, repairs + certificates",
-    text: "We provide comprehensive boiler services including installations, repairs, diagnostics, and issuing of safety certificates."
-  },
-  {
-    title: "Central heating installation + repairs",
-    text: "Stay warm with our expert central heating installations and repair services, ensuring efficient heating throughout your home."
-  },
-  {
-    title: "Power flushing of central heating systems",
-    text: "Improve the efficiency of your heating system with our power flushing service, removing sludge and debris from your radiators."
-  },
-  {
-    title: "Underfloor heating installation, services, diagnostics + repairs",
-    text: "Enjoy the comfort of underfloor heating with our installation services, including diagnostics and repairs for any issues."
-  },
-  {
-    title: "Thames Water approved main water application, installation, connections + certificate",
-    text: "We are Thames Water-approved installers, ensuring safe and certified connections to the main water supply for your property."
-  },
-  {
-    title: "Booster pump installations + replacements",
-    text: "Boost your water pressure with our booster pump installations, replacements, and expert advice to meet your specific needs."
-  },
-  {
-    title: "Gas installations + alterations",
-    text: "Our qualified team provides safe gas installations and alterations, ensuring compliance with all safety regulations."
-  },
-  {
-    title: "Gas safety inspections",
-    text: "Keep your home safe with our comprehensive gas safety inspections, ensuring your system is up to standard and hazard-free."
-  },
-  {
-    title: "Gas certificates, landlord certificates, safety certificates",
-    text: "We provide all necessary gas safety certificates, including landlord and safety certificates, to comply with legal requirements."
-  },
-  {
-    title: "Customer advice service",
-    text: "Our customer advice service helps you make informed decisions about your plumbing, heating, and gas needs, with expert guidance."
-  },
-  {
-    title: "Free quotation",
-    text: "Contact us for a no-obligation, free quotation on any plumbing, heating, or gas service. We're here to help!"
-  }
-];
+onMounted(() => {
+  const img = new Image();
+  img.src = imgPath;
+  img.onload = () => {
+    preloadedImg.value = imgPath;
+  };
+  img.onerror = () => {
+    console.error('Bild konnte nicht geladen werden.');
+  };
+});
 
-const contactItems = [
-  {
-    icon: "mdi-phone",
-    text: "+44 (0) 79 400 774 49",
-    href: "tel:+447940077449"
-  },
-  {
-    icon: "mdi-email",
-    text: "phinstallations[at]gmx.eu",
-    href: "mailto:phinstallations@gmx.eu"
-  },
-  {
-    icon: "mdi-map-marker",
-    text: "JS PH Installations Ltd",
-    href: "https://maps.app.goo.gl/oAtzJZfzTFLEnZ4RA"
-  },
-];
+const menuItems = Object.values(menuConfig);
 
-
-const galleryItems = [
-  {
-    title: "Bathroom",
-    dir: "Bathroom",
-    images: ["1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG", "6.JPG", "7.JPG", "8.JPG", "9.JPG", "10.JPG", "11.JPG"]
-  },
-  {
-    title: "Booster",
-    dir: "Booster",
-    images: ["1.JPG", "2.JPG"]
-  },
-  {
-    title: "Central Heating",
-    dir: "CentralHeating",
-    images: ["1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG"]
-  },
-  {
-    title: "Underfloor Heating",
-    dir: "UnderfloorHeating",
-    images: ["1.JPG", "2.JPG", "3.JPG", "4.JPG"]
-  }
-];
+const homeSection = sectionsConfig.home;
+const aboutSection = sectionsConfig.about;
+const philosophySection = sectionsConfig.philosophy;
+const servicesSection = sectionsConfig.services;
+const gallerySection = sectionsConfig.gallery;
+const contactSection = sectionsConfig.contact;
+const footerSection = sectionsConfig.footer;
 
 </script>
