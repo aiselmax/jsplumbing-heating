@@ -16,7 +16,7 @@
         <SectionParalax :img="preloadedImg" />
         <SectionContact :id="contactSection.id" :items="contactSection.items" :email="contactSection.email" />
         <SectionParalax :img="preloadedImg" />
-        <SectionFooter :id="footerSection.id" :menuItems="menuItems" :text="footerSection.text"/>
+        <SectionFooter :id="footerSection.id" :menuItems="menuItems" :text="footerSection.text" />
       </v-main>
     </v-container>
   </v-app>
@@ -64,10 +64,20 @@ import SectionContact from './components/SectionContact.vue';
 import SectionFooter from './components/SectionFooter.vue';
 import MobileAppBar from './components/MobileAppBar.vue';
 
-import { menuConfig, sectionsConfig } from './dataConfig.js';
-
+import {headConfig, menuConfig, sectionsConfig } from './dataConfig.js';
+import { useHead } from '@unhead/vue'
 import imgPath from './assets/home.jpg';
 const preloadedImg = ref('');
+
+useHead({
+  title: headConfig.title,
+  meta: [
+    { name: 'description', content: headConfig.description },
+    { property: 'og:title', content: headConfig.title },
+    { property: 'og:description', content: headConfig.description },
+    { name: 'keywords', content: headConfig.keywords },
+  ],
+})
 
 onMounted(() => {
   const img = new Image();

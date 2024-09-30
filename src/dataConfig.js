@@ -1,4 +1,10 @@
 // dataConfig.js
+export const headConfig = {
+    title: 'JS Plumbing & Heating Installations Ltd',
+    description: '➠ We are a family run business, based in Kingston upon Thames. ➠ With over 3 decades of experience, JS Plumbing & Heating Installations has eveloved in bringing high quality services and installations of leading industry standard plumbing and heating systems to clients',
+    keywords: 'Bathroom installations and refurbishments,  Bathroom repair,  Boiling water unit installations, Water softener installations and services,  Vented and unvented hot water cylinder installations, replacements, services, repairs + certificates,  Boiler installations, replacements, services, diagnostics, repairs + certificates, Central heating installation + repairs, Power flushing of central heating systems,  Underfloor heating installation, services, diagnostics + repairs, Thames Water approved main water application, installation, connections + certificate,  Booster pump installations + replacements,  Gas installations + alterations, Gas safety inspections,  Gas certificates, landlord certificates, safety certificates,  Customer advice service, Free quotations, Joerg Schaefer',
+};
+
 export const menuConfig = {
     home: { title: '', value: 'home', icon: '' },
     about: { title: 'About us', value: 'about', icon: 'mdi-account-box' },

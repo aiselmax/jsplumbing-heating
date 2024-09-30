@@ -10,8 +10,10 @@ import '@mdi/font/css/materialdesignicons.css'; // Ensure the CSS is loade
 // Components
 import App from './App.vue'
 import myDirectives from "./directives.js"
+import { createHead } from "@unhead/vue";
 
 const app = createApp(App);
+const head = createHead();
 
 for (let name in myDirectives) {
     // Creation of the directive name within the application
@@ -30,4 +32,4 @@ const vuetify = createVuetify({
     },
 })
 
-app.use(vuetify).mount('#app')
+app.use(vuetify).use(head).mount('#app')
