@@ -128,22 +128,22 @@ export const sectionsConfig = {
             {
                 title: "Bathroom",
                 dir: "Bathroom",
-                images: ["1.JPG", "2.JPG", "3.JPG", "4.JPG", "5.JPG", "6.JPG"]
+                images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
             },
             {
                 title: "Booster",
                 dir: "Booster",
-                images: ["1.JPG", "2.JPG"]
+                images: ["1.jpg", "2.jpg"]
             },
             {
                 title: "Central Heating",
                 dir: "CentralHeating",
-                images: ["1.JPG", "2.JPG", "3.JPG"]
+                images: ["1.jpg", "2.jpg", "3.jpg"]
             },
             {
                 title: "Underfloor Heating",
                 dir: "UnderfloorHeating",
-                images: ["1.JPG", "2.JPG"]
+                images: ["1.jpg", "2.jpg"]
             }
         ]
     },
